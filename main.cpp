@@ -40,15 +40,15 @@ void Sort(int list[], int S)
       if (list[n] > res) 
       {
        key = n;
-        res = list[n];
+       res = list[n];
       }
-    }
+     }
       if (key != l) 
       {
         list[key] = list[l];
         list[l] = res;
       }
-    }
+     }
 }
 
 
