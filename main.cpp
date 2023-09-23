@@ -7,74 +7,75 @@ using namespace std;
 /* Задание 1
 void Sort(int list[], int S)
 {
- int i, j, l, n;
- int key, F_index, S_index;
- int res, res1, res2;
- 
-  for (i = 0; i < S; i++) 
- {
-   if (list[i] < 0) 
-   {
-     F_index = i;
-     res1 = list[i];
-     break;
-   }
- } 
-  for (j = 9; j > 0; j--)
-  {
-    if (list[j] < 0) 
-   {
-     S_index = j;
-     res2 = list[j];
-     break;
-   }
-  }
- 
-  for (l = F_index; l <= S_index; l++) 
-   {
-    key = l;
-    res = list[l];
+    int i, j, l, n;
+    int index, FarLft_index, FarRgt_index;
+    int key, val1, val2;
 
-    for (n = l + 1; n <= S_index; n++) 
+    for (i = 0; i < S; i++)
     {
-      if (list[n] > res) 
-      {
-       key = n;
-       res = list[n];
-      }
-     }
-      if (key != l) 
-      {
-        list[key] = list[l];
-        list[l] = res;
-      }
-     }
+        if (list[i] < 0)
+        {
+            FarLft_index = i;
+            val1 = list[i];
+            break;
+        }
+    }
+    for (j = S - 1; j > 0; j--)
+    {
+        if (list[j] < 0)
+        {
+            FarRgt_index = j;
+            val2 = list[j];
+            break;
+        }
+    }
+
+    for (l = FarLft_index + 1; l < FarRgt_index; l++)
+    {
+      
+        index = l;
+        key = list[l];
+    
+        for (n = l; n < FarRgt_index; n++)
+        {
+            if (list[n] > key)
+            {
+                index = n;
+                key = list[n];
+            }
+        }
+        if (index != l)
+        {
+            list[index] = list[l];
+            list[l] = key;
+        }
+    }
 }
 
 
 int main()
 {
- srand(time(NULL));
- setlocale(0,"RUS");
- 
- const int size = 10;
- int arr[size];
- 
+    srand(time(NULL));
+    setlocale(0, "RUS");
 
- for (int i = 0; i < size; i++)
- {
- arr[i] = -20 + rand() % 40;
- cout << arr[i] << " ";
- }
- cout << "\n\n";
+    const int size = 10;
+    int arr[size];
 
- Sort(arr,size);
 
- for (int i = 0; i < size; i++)
- {
-  cout << arr[i] << " ";
- }
- cout << "\n\n";
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = -20 + rand() % 40;
+        cout << arr[i] << " ";
+    }
+    cout << "\n\n";
+
+    Sort(arr, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        cout << arr[i] << " ";
+    }
+    cout << "\n\n";
 }
 
 
@@ -83,60 +84,60 @@ int main()
 
 
 Задание 2
-void First_Func(int list[], int S) 
+void First_Func(int list[], int S)
 {
-  int j;
-  for (int i = 0;i < S;i++) 
-    { 
-      j = rand() % S;
-      
-      int res = list[i];
-      list[i] = list[j];
-      list[j] = res;
+    int j;
+    for (int i = 0; i <= S; i++)
+    {
+        j = rand() % S;
+
+        int res = list[i];
+        list[i] = list[j];
+        list[j] = res;
     }
-  cout << "\n";
+    cout << "\n";
 }
 
-void Second_Func(int list[],int S,int position) 
+void Second_Func(int list[], int S, int position)
 {
-  for (int i = 0; i <= position; i++) 
-   {
-    int key = i;
-    int res = list[i];
-
-    for (int j = i + 1; j <= position; j++) 
+    for (int i = 0; i <= position; i++)
     {
-      if (list[j] > res) 
-      {
-        key = j;
-        res = list[j];
-      }
-    }
-      if (key != i) 
-      {
-        list[key] = list[i];
-        list[i] = res;
-      }
-    }
-  
-  for (int l = position; l <= S; l++) 
-   {
-    int key = l;
-    int res = list[l];
+        int index = i;
+        int key = list[i];
 
-    for (int n = l + 1; n <= S; n++) 
-    {
-      if (list[n] < res) 
-      {
-        key = n;
-        res = list[n];
-      }
+        for (int j = i + 1; j <= position; j++)
+        {
+            if (list[j] > key)
+            {
+                index = j;
+                key = list[j];
+            }
+        }
+        if (index != i)
+        {
+            list[index] = list[i];
+            list[i] = key;
+        }
     }
-      if (key != l) 
-      {
-        list[key] = list[l];
-        list[l] = res;
-      }
+
+    for (int l = position; l <= S; l++)
+    {
+        int index = l;
+        int key = list[l];
+
+        for (int n = l + 1; n <= S; n++)
+        {
+            if (list[n] < key)
+            {
+                index = n;
+                key = list[n];
+            }
+        }
+        if (index != l)
+        {
+            list[index] = list[l];
+            list[l] = key;
+        }
     }
 }
 
@@ -144,47 +145,47 @@ void Second_Func(int list[],int S,int position)
 
 int main()
 {
- srand(time(NULL));
- setlocale(0,"RUS");
- 
- 
- const int size = 19;
- int RandNum = rand() % 20;
- int index;
- int arr[size];
- 
- for (int i = 0; i < size; i++) 
-  {
-    arr[i] = i + 1;
-    cout << arr[i] << " ";
-  }
- cout << "\n\n";
- cout << RandNum << "\n";
+    srand(time(NULL));
+    setlocale(0, "RUS");
 
- First_Func(arr,size);
- 
- for (int i = 0; i < size; i++) 
-  {
-    cout << arr[i] << " ";
-  }
- 
-  cout << "\n";
- 
-  for (int i = 0; i < size; i++) 
-  {
-    if (RandNum == arr[i]) 
+
+    const int size = 19;
+    int RandNum = rand() % 19;
+    int index;
+    int arr[size];
+
+    for (int i = 0; i < size; i++)
     {
-       index = i;
-       cout << "Индекс случайного числа:" << i;
+        arr[i] = i + 1;
+        cout << arr[i] << " ";
     }
-  } 
+    cout << "\n\n";
+    cout << "Случайное число: " << RandNum << "\n";
 
-  Second_Func(arr,size,index);
-  
-  cout << "\n\n";
-  
-  for (int i = 0; i < size; i++) 
-  {
-    cout << arr[i] << " ";
-  }
+    First_Func(arr, size);
+
+    for (int i = 0; i < size; i++)
+    {
+        cout << arr[i] << " ";
+    }
+
+    cout << "\n";
+
+    for (int i = 0; i < size; i++)
+    {
+        if (RandNum == arr[i])
+        {
+            index = i;
+            cout << "Индекс случайного числа:" << i;
+        }
+    }
+
+    Second_Func(arr, size, index);
+
+    cout << "\n\n";
+
+    for (int i = 0; i < size; i++)
+    {
+        cout << arr[i] << " ";
+    }
 }*/
